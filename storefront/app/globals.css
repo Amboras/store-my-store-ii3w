@@ -4,35 +4,36 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 0 0% 10%;
-    --muted: 40 10% 94%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 35 40% 50%;
-    --accent-foreground: 0 0% 100%;
-    --border: 40 10% 88%;
-    --ring: 35 40% 50%;
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 98%;
-    --destructive: 0 72% 51%;
+    /* DASTOOR palette — warm cream, deep emerald, antique gold */
+    --background: 37 35% 96%;          /* warm ivory */
+    --foreground: 20 12% 12%;          /* charcoal */
+    --muted: 36 22% 92%;               /* soft beige */
+    --muted-foreground: 25 10% 38%;
+    --accent: 37 45% 45%;              /* antique gold */
+    --accent-foreground: 37 35% 98%;
+    --border: 34 20% 86%;
+    --ring: 157 60% 22%;
+    --primary: 157 60% 18%;            /* deep emerald */
+    --primary-foreground: 37 35% 96%;
+    --destructive: 0 72% 45%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Brand colors (dynamically injected from Store.metadata.brand) */
-    /* Access in CSS: var(--brand-primary), var(--brand-secondary) */
-    /* Managed by BrandStyleInjector component */
+    /* Brand colors */
+    --brand-primary: #0F4D36;
+    --brand-secondary: #B48A3C;
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 40 20% 94%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 35 45% 55%;
-    --accent-foreground: 0 0% 100%;
-    --border: 0 0% 16%;
-    --ring: 35 45% 55%;
-    --primary: 40 20% 94%;
-    --primary-foreground: 0 0% 6%;
+    --background: 157 15% 7%;
+    --foreground: 37 30% 94%;
+    --muted: 157 10% 14%;
+    --muted-foreground: 36 8% 60%;
+    --accent: 37 50% 55%;
+    --accent-foreground: 20 15% 10%;
+    --border: 157 10% 18%;
+    --ring: 37 50% 55%;
+    --primary: 37 30% 94%;
+    --primary-foreground: 157 15% 7%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
   }
@@ -72,13 +73,13 @@
     @apply w-full;
   }
 
-  /* Brand color utilities - uses colors from Store.metadata.brand */
+  /* Brand color utilities */
   .btn-brand-primary {
     background-color: var(--brand-primary, hsl(var(--primary)));
     color: white;
   }
   .btn-brand-primary:hover {
-    opacity: 0.9;
+    opacity: 0.92;
   }
 
   .text-brand-primary {
@@ -100,6 +101,39 @@
   .bg-brand-secondary {
     background-color: var(--brand-secondary, hsl(var(--accent)));
   }
+
+  /* Decorative ornamental divider (subtle sub-continental motif) */
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: hsl(var(--accent));
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+  }
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: '';
+    width: 3rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.4;
+  }
+
+  /* Subtle paper/fabric grain overlay */
+  .fabric-grain {
+    position: relative;
+  }
+  .fabric-grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(180, 138, 60, 0.05) 1px, transparent 1px);
+    background-size: 3px 3px;
+    mix-blend-mode: multiply;
+  }
 }
 
 /* Smooth scrolling */
@@ -109,7 +143,8 @@ html {
 
 /* Selection color */
 ::selection {
-  @apply bg-accent/20 text-foreground;
+  background-color: hsl(var(--primary) / 0.15);
+  color: hsl(var(--foreground));
 }
 
 /* Focus styles */
@@ -117,7 +152,6 @@ html {
   @apply outline-2 outline-offset-2 outline-ring;
 }
 
-/* Cookie consent animation */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -130,5 +164,13 @@ html {
 }
 
 .animate-fade-in {
-  animation: fade-in 0.3s ease-out;
+  animation: fade-in 0.4s ease-out;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
 }

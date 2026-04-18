@@ -81,27 +81,36 @@ export default function Header() {
             </button>
 
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-heading text-2xl font-semibold tracking-tight">
-                Store
+            <Link href="/" className="flex items-center gap-2 group">
+              <span className="font-heading text-2xl font-semibold tracking-[0.2em] text-brand-primary">
+                DASTOOR
+              </span>
+              <span className="hidden sm:inline text-[10px] uppercase tracking-[0.25em] text-muted-foreground border-l border-border/60 pl-2">
+                Bespoke · Est. 2024
               </span>
             </Link>
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
-              <Link href="/products" className="text-sm tracking-wide uppercase link-underline py-1" prefetch={true}>
-                Shop All
+              <Link href="/products" className="text-xs tracking-[0.18em] uppercase link-underline py-1" prefetch={true}>
+                Shop
               </Link>
-              {collections?.slice(0, 4).map((collection: any) => (
+              <Link href="/products" className="text-xs tracking-[0.18em] uppercase link-underline py-1" prefetch={true}>
+                Design Your Own
+              </Link>
+              {collections?.slice(0, 3).map((collection: any) => (
                 <Link
                   key={collection.id}
                   href={`/collections/${collection.handle}`}
-                  className="text-sm tracking-wide uppercase link-underline py-1"
+                  className="text-xs tracking-[0.18em] uppercase link-underline py-1"
                   prefetch={true}
                 >
                   {collection.title}
                 </Link>
               ))}
+              <Link href="/about" className="text-xs tracking-[0.18em] uppercase link-underline py-1" prefetch={true}>
+                Atelier
+              </Link>
             </nav>
 
             {/* Actions */}
